@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { FC } from 'react'
+import { Redirect, Route, Switch } from "wouter"
+import LayoutWebsite from 'layouts/Website';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// Pages
+import Home from 'pages/Home'
+import SignIn from 'pages/SignIn';
+import Register from 'pages/Register';
+import NotFound from 'pages/NotFound';
+
+const App: FC = () => {
+
+    /**
+     * Router
+     */
+    return (
+        <LayoutWebsite>
+        <Switch>
+            <Route path="/">
+                <Home />
+            </Route>
+            <Route path="/sign-in">
+                <SignIn />
+            </Route>
+            <Route path="/register">
+                <Register />
+            </Route>
+            <Route path="/404">
+                <NotFound />
+            </Route>
+            <Route>
+                <Redirect to="/404" />
+            </Route>
+        </Switch>
+        <Home />
+        </LayoutWebsite>
+    )
 }
 
-export default App;
+export default App
